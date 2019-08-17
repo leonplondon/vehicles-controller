@@ -11,6 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use Illuminate\Support\Facades\Route;
+
+Route::get('/forbidden', 'VehicleController@forbidden')->name('forbidden');
+
+Route::middleware('authenticated')->group(function () {
+    Route::get('/register', 'VehicleController@register')->name('register');
+    Route::post('/store', 'VehicleController@store')->name('store');
+    Route::get('/stats', 'VehicleController@stats')->name('stats');
+    Route::get('/vehicles', 'VehicleController@vehicles')->name('vehicles');
 });
+
+Route::get('/', 'VehicleController@index');
+Route::get('/{id}', 'VehicleController@index');
