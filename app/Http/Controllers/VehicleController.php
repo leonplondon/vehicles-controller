@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuthorizedCode;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class VehicleController extends Controller
 {
     public function index($id = null)
@@ -10,14 +13,22 @@ class VehicleController extends Controller
             ->session()
             ->get('authenticated', false);
 
-        if (!$authenticated && ($id == null || $id != '123')) {
+        if (!$authenticated && $id == null) {
             return redirect('forbidden');
         }
 
         if (!$authenticated) {
-            request()
-                ->session()
-                ->put('authenticated', true);
+            try {
+                AuthorizedCode::query()
+                    ->where('code', '=', $id)
+                    ->firstOrFail();
+
+                request()
+                    ->session()
+                    ->put('authenticated', true);
+            } catch (ModelNotFoundException $e) {
+                return redirect('forbidden');
+            }
         }
 
         return view('home');
