@@ -129,8 +129,24 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'name' => [
+            'required' => 'El nombre del propietario es obligatorio',
+            'string' => 'El nombre del propietario no puede ser vacío',
+        ],
+        'id' => [
+            'required' => 'El documento del propietario es requerido',
+            'integer' => 'El documento debe ser un numero entero, no admite signos de puntuación',
+            'min' => 'El documento es un número positivo',
+        ],
+        'brand_id' => [
+            'required' => 'Selecciona la marca del vehículo',
+            'integer' => 'La marca de vehículo no es válida',
+            'exists' => 'La marca de vehículo no es válida',
+        ],
+        'plate' => [
+            'required' => 'La placa del vehículo es obligatoria',
+            'string' => 'La placa debe ser alfanumérica',
+            'regex' => 'La placa debe tener el formato LLL### o LLL##L, donde L es una letra y # es un número',
         ],
     ],
 
