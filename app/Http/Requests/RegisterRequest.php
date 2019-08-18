@@ -27,9 +27,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required|string',
             'id' => 'required|integer|min:0',
             'brand_id' => 'required|integer|exists:brands,id',
-            'plate' => 'required|string',
+            'plate' => ['required', 'string', 'regex:/^(([A-Za-z]{3}\d{3})|([A-Za-z]{3}\d{2}[A-Za-z]{1}))$/'],
         ];
     }
 }
-
-// ^/^(([A-Za-z]{3}\d{3})|([A-Za-z]{3}\d{2}[A-Za-z]{1}))$/i$

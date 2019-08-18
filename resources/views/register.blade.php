@@ -12,7 +12,8 @@
 
                     <div class="form-group">
                         <label for="name">Nombre</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
+                               value="{{old('name')}}">
                         @error('name')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -20,7 +21,8 @@
 
                     <div class="form-group">
                         <label for="id">Cedula</label>
-                        <input type="number" class="form-control" id="id" name="id" placeholder="Cedula">
+                        <input type="number" class="form-control" id="id" name="id" placeholder="Cedula"
+                               value="{{old('id')}}">
                         @error('id')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -38,23 +40,25 @@
 
                     <div class="form-group">
                         <label for="plate">Placa</label>
-                        <input type="text" class="form-control" id="plate" name="plate" placeholder="Placa">
+                        <input type="text" class="form-control" id="plate" name="plate" placeholder="Placa"
+                               value="{{old('plate')}}">
                         @error('plate')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <div class="alert alert-danger">{{$message}}</div>
                         @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="brand_id">Marca</label>
                         <select class="form-control" id="brand_id" name="brand_id">
+                            <option>Selecciona la marca</option>
                             @foreach($brands as $brand)
-                                <option value="{{$brand->id}}" @if($loop->first) selected="selected" @endif>
+                                <option value="{{$brand->id}}" @if (old('brand_id') == $brand->id) selected @endif>
                                     {{$brand->name}}
                                 </option>
                             @endforeach
                         </select>
                         @error('brand_id')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <div class="alert alert-danger">{{$message}}</div>
                         @enderror
                     </div>
 
