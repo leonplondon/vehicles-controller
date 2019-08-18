@@ -7,8 +7,8 @@
         </div>
 
         <div class="links">
-            <a href="{{route('vehicles')}}">List vehicles</a>
             <a href="{{route('register')}}">Register vehicle</a>
+            <a href="{{route('vehicles')}}">List vehicles</a>
             <a href="{{route('stats')}}">Stats</a>
         </div>
     </div>
