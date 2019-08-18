@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
+@section('title')
+    {{__('strings.register_vehicles')}}
+@endsection
+
 @section('body')
+    <div class="title m-b-md m-t-md centered-text">
+        {{__('strings.register')}}
+    </div>
+
     <form method="post" action="{{route('store')}}">
 
         <div class="container mt-5">
@@ -11,8 +19,9 @@
                 <div class="card-body">
 
                     <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
+                        <label for="name">{{__('strings.name')}}</label>
+                        <input type="text" class="form-control" id="name" name="name"
+                               placeholder="{{__('strings.name')}}"
                                value="{{old('name')}}">
                         @error('name')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -20,8 +29,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="id">Cedula</label>
-                        <input type="number" class="form-control" id="id" name="id" placeholder="Cedula"
+                        <label for="id">{{__('strings.dni')}}</label>
+                        <input type="number" class="form-control" id="id" name="id" placeholder="{{__('strings.dni')}}"
                                value="{{old('id')}}">
                         @error('id')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -39,8 +48,9 @@
                 <div class="card-body">
 
                     <div class="form-group">
-                        <label for="plate">Placa</label>
-                        <input type="text" class="form-control" id="plate" name="plate" placeholder="Placa"
+                        <label for="plate">{{__('strings.plate')}}</label>
+                        <input type="text" class="form-control" id="plate" name="plate"
+                               placeholder="{{__('strings.plate')}}"
                                value="{{old('plate')}}">
                         @error('plate')
                         <div class="alert alert-danger">{{$message}}</div>
@@ -48,9 +58,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="brand_id">Marca</label>
+                        <label for="brand_id">{{__('strings.brand')}}</label>
                         <select class="form-control" id="brand_id" name="brand_id">
-                            <option>Selecciona la marca</option>
+                            <option>{{__('strings.choose_brand')}}</option>
                             @foreach($brands as $brand)
                                 <option value="{{$brand->id}}" @if (old('brand_id') == $brand->id) selected @endif>
                                     {{$brand->name}}
@@ -69,7 +79,7 @@
             <br>
 
             <div class="content">
-                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button type="submit" class="btn btn-primary">{{__('strings.action_register')}}</button>
             </div>
 
         </div>

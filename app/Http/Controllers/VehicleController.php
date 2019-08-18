@@ -57,6 +57,7 @@ class VehicleController extends Controller
     public function store(RegisterRequest $request)
     {
         $validatedData = $request->validated();
+        $validatedData['plate'] = strtoupper($validatedData['plate']);
 
         $person = new Person();
         $person->fill($validatedData);

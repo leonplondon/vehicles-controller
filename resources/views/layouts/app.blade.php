@@ -47,6 +47,10 @@
         .m-b-md {
             margin-bottom: 30px;
         }
+
+        .centered-text {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
