@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AuthorizedCodeSeed::class);
+        $this
+            ->call(AuthorizedCodeSeed::class)
+            ->call(BrandSeed::class);
     }
 }

@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Models\AuthorizedCode;
+use App\Models\Brand;
+use App\Models\Person;
+use App\Models\Vehicle;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 
 class VehicleController extends Controller
 {
@@ -41,10 +47,46 @@ class VehicleController extends Controller
 
     public function register()
     {
+        $brands = Brand::all();
+
+        return view('register', [
+            'brands' => $brands,
+        ]);
     }
 
-    public function store()
+    public function store(RegisterRequest $request)
     {
+        $validatedData = $request->validated();
+
+        $person = new Person();
+        $person->fill($validatedData);
+
+        $vehicle = new Vehicle();
+        $vehicle->fill($validatedData);
+
+        DB::beginTransaction();
+
+        try {
+            $person->save();
+
+            $person
+                ->vehicle()
+                ->save($vehicle);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return back()
+                ->withInput()
+                ->with([
+                    'message' => 'Ocurrió un error, intenta más tarde',
+                    'success' => false,
+                ]);
+        }
+
+        DB::commit();
+        return back()->with([
+            'message' => 'El vehiculo se ha registrado correctamente',
+            'success' => true,
+        ]);
     }
 
     public function vehicles()
