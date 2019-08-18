@@ -102,7 +102,7 @@ class VehicleController extends Controller
 
     public function stats()
     {
-        $stats = DB::select('SELECT count(plate) AS amount, brands.name as brand FROM vehicles INNER JOIN brands on vehicles.brand_id = brands.id GROUP BY brand_id');
+        $stats = DB::select('SELECT count(plate) AS amount, brands.name as brand FROM vehicles INNER JOIN brands on vehicles.brand_id = brands.id GROUP BY brands.id');
         
         return view('stats', [
             'stats' => $stats
