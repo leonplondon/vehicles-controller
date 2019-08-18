@@ -22,5 +22,5 @@ Route::middleware('authenticated')->group(function () {
     Route::get('/vehicles', 'VehicleController@vehicles')->name('vehicles');
 });
 
-Route::get('/', 'VehicleController@index');
+Route::get('/', 'VehicleController@index')->name('home');
 Route::get('/{id}', 'VehicleController@index');
